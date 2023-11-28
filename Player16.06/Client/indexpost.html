@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <title>Authorizhation</title>
+
+</head>
+
+<body>
+
+    <h2>User Authorizhation</h2>
+    <div id="message"></div>
+    <div>
+        <p>Name: <br />
+            <input name="userName" id="userName" />
+        </p>
+        <p>Password: <br />
+            <input name="userPassword" id="userPassword" type="number" />
+        </p>
+        <button id="sendBtn">Send</button>
+    </div>
+
+
+    <script>
+        document.getElementById("sendBtn").addEventListener("click", send);
+        async function send() {
+            const response = await fetch("/api/user", {
+                method: "POST",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: document.getElementById("userName").value,
+                    Password: document.getElementById("userPassword").value
+                })
+            });
+            const message = await response.json();
+            document.getElementById("message").innerText = message.text;
+        }
+    </script>
+</body>
+
+
+
+
+
+
+
+
+
+</html>
